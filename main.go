@@ -8,6 +8,7 @@ func main() {
 	//cpf := "..."	cria a variável	forma curta de declaração
 	
 	var soma = 0 //cria a variável somar e atribui o valor 0
+	var soma2 = 0 //cria a variável somar e atribui o valor 0
 
 	for i := 0; i < 9; i++ {
 		digito := int(cpf[i] - '0') //converte o valor do dígito de ASCII para número
@@ -29,7 +30,7 @@ func main() {
 	}
 
 	fmt.Println("Soma total:", soma)
-	fmt.Println("digito 1", digito1)
+	fmt.Println("digito 1: ", digito1)
 
 
 	if int(cpf[9]-'0') == digito1 { //compara o dígito verificador calculado com o dígito verificador do CPF
@@ -37,6 +38,39 @@ func main() {
 	} else {
 		fmt.Println("O primeiro dígito verificador está incorreto")
 	}
-}
 
+
+
+
+	for i := 0; i < 10; i++ {
+		digito2 := int(cpf[i] - '0') //converte o valor do dígito de ASCII para número
+
+		peso2 := 11 - i //calcula o peso do dígito, que é 10 menos o índice do dígito
+
+		soma2 += digito2 * peso2 //acumula o resultado da multiplicação na variável somar
+	}
+
+	var resto2 = soma2 % 11 //calcula o resto da divisão da soma por 11
+
+
+	var digito2 = 0 //inicializa a variável digito1 com 0
+
+	if resto2 < 2 {
+		digito2 = 0 //se o resto for menor que 2, o dígito verificador é 0
+	} else {
+		digito2 = 11 - resto2 //se o resto for maior ou igual a 2, o dígito verificador é 11 menos o resto
+	}
+
+	fmt.Println("Soma total:", soma2)
+	fmt.Println("digito 2: ", digito2)
+
+
+	if int(cpf[10]-'0') == digito2 { //compara o dígito verificador calculado com o dígito verificador do CPF
+		fmt.Println("O segundo dígito verificador está correto")
+	} else {
+		fmt.Println("O segundo dígito verificador está incorreto")
+	}
+	
+
+}
 
