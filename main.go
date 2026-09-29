@@ -3,22 +3,19 @@ package main
 import "fmt"
 
 func main() {
-	cpf := "52998224725" // Exemplo de CPF válido
 
+	fmt.Println(validar("52998224725"))
+	fmt.Println(validar("52998224726"))
+}
+
+func validar(cpf string) bool{
 	digito1 := calcularDigito(cpf, 9)
 	digito2 := calcularDigito(cpf, 10)
+	
+	primeiroOk := int(cpf[9]-'0') == digito1
+	segundoOk := int(cpf[10]-'0') == digito2
 
-	if int(cpf[9]-'0') == digito1 {
-		fmt.Println("O primeiro dígito verificador está correto")
-	} else {
-		fmt.Println("O primeiro dígito verificador está incorreto")
-	}
-
-	if int(cpf[10]-'0') == digito2 {
-		fmt.Println("O segundo dígito verificador está correto")
-	} else {
-		fmt.Println("O segundo dígito verificador está incorreto")
-	}
+	return primeiroOk && segundoOk
 }
 
 // calcularDigito calcula um dígito verificador do CPF.
