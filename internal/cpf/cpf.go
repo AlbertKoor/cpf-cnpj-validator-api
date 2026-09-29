@@ -6,6 +6,10 @@ func limpar(cpf string) string {
 	for _, c := range cpf {
 		if c >= '0' && c <= '9' {
 			limpo += string(c)
+		} else if c == '.' || c == '-' {
+			// Ignorar pontos e traços
+		} else {
+			return "" // Retorna vazio se houver caracteres inválidos
 		}
 	}
 	return limpo
