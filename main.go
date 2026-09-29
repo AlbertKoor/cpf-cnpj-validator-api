@@ -3,74 +3,43 @@ package main
 import "fmt"
 
 func main() {
+	cpf := "52998224725" // Exemplo de CPF válido
 
-	var cpf string = "52998224725" //cria a variável de forma longa de declaração
-	//cpf := "..."	cria a variável	forma curta de declaração
-	
-	var soma = 0 //cria a variável somar e atribui o valor 0
-	var soma2 = 0 //cria a variável somar e atribui o valor 0
+	digito1 := calcularDigito(cpf, 9)
+	digito2 := calcularDigito(cpf, 10)
 
-	for i := 0; i < 9; i++ {
-		digito := int(cpf[i] - '0') //converte o valor do dígito de ASCII para número
-
-		peso := 10 - i //calcula o peso do dígito, que é 10 menos o índice do dígito
-
-		soma += digito * peso //acumula o resultado da multiplicação na variável somar
-	}
-
-	var resto = soma % 11 //calcula o resto da divisão da soma por 11
-
-
-	var digito1 = 0 //inicializa a variável digito1 com 0
-
-	if resto < 2 {
-		digito1 = 0 //se o resto for menor que 2, o dígito verificador é 0
-	} else {
-		digito1 = 11 - resto //se o resto for maior ou igual a 2, o dígito verificador é 11 menos o resto
-	}
-
-	fmt.Println("Soma total:", soma)
-	fmt.Println("digito 1: ", digito1)
-
-
-	if int(cpf[9]-'0') == digito1 { //compara o dígito verificador calculado com o dígito verificador do CPF
+	if int(cpf[9]-'0') == digito1 {
 		fmt.Println("O primeiro dígito verificador está correto")
 	} else {
 		fmt.Println("O primeiro dígito verificador está incorreto")
 	}
 
-
-
-
-	for i := 0; i < 10; i++ {
-		digito2 := int(cpf[i] - '0') //converte o valor do dígito de ASCII para número
-
-		peso2 := 11 - i //calcula o peso do dígito, que é 10 menos o índice do dígito
-
-		soma2 += digito2 * peso2 //acumula o resultado da multiplicação na variável somar
-	}
-
-	var resto2 = soma2 % 11 //calcula o resto da divisão da soma por 11
-
-
-	var digito2 = 0 //inicializa a variável digito1 com 0
-
-	if resto2 < 2 {
-		digito2 = 0 //se o resto for menor que 2, o dígito verificador é 0
-	} else {
-		digito2 = 11 - resto2 //se o resto for maior ou igual a 2, o dígito verificador é 11 menos o resto
-	}
-
-	fmt.Println("Soma total:", soma2)
-	fmt.Println("digito 2: ", digito2)
-
-
-	if int(cpf[10]-'0') == digito2 { //compara o dígito verificador calculado com o dígito verificador do CPF
+	if int(cpf[10]-'0') == digito2 {
 		fmt.Println("O segundo dígito verificador está correto")
 	} else {
 		fmt.Println("O segundo dígito verificador está incorreto")
 	}
-	
-
 }
 
+// calcularDigito calcula um dígito verificador do CPF.
+// quantidade = quantos dígitos entram na conta (9 para o 1º, 10 para o 2º).
+func calcularDigito(cpf string, quantidade int) int {
+	soma := 0
+
+	for i := 0; i < quantidade; i++ {
+		digito := int(cpf[i] - '0')
+		peso := quantidade + 1 - i
+		soma += digito * peso
+	}
+
+	resto := soma % 11
+
+	verificador := 0
+	if resto < 2 {
+		verificador = 0
+	} else {
+		verificador = 11 - resto
+	}
+
+	return verificador
+}
