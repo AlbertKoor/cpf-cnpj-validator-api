@@ -3,15 +3,34 @@ package main
 import "fmt"
 
 func main() {
-
 	fmt.Println(validar("52998224725"))
-	fmt.Println(validar("52998224726"))
+	fmt.Println(validar("529.982.247-25"))
+	fmt.Println(validar("11111111111"))
+	fmt.Println(validar("123"))
+	fmt.Println(validar(""))
 }
 
-func validar(cpf string) bool{
+func limpar(cpf string) string {
+	limpo := ""
+
+	for _, c := range cpf {
+		if c >= '0' && c <= '9' {
+			limpo += string(c)
+		}
+	}
+	return limpo
+}
+
+func validar(cpf string) bool {
+	cpf = limpar(cpf)
+
+	if len(cpf) != 11 {
+		return false
+	}
+
 	digito1 := calcularDigito(cpf, 9)
 	digito2 := calcularDigito(cpf, 10)
-	
+
 	primeiroOk := int(cpf[9]-'0') == digito1
 	segundoOk := int(cpf[10]-'0') == digito2
 
