@@ -21,10 +21,22 @@ func limpar(cpf string) string {
 	return limpo
 }
 
+func todosIguais(cpf string) bool {
+	for i := 1; i < len(cpf); i++ {
+		if cpf[i] != cpf[0] {
+			return false
+		}
+	}
+	return true
+}
+
 func validar(cpf string) bool {
 	cpf = limpar(cpf)
 
 	if len(cpf) != 11 {
+		return false
+	}
+	if todosIguais(cpf) {
 		return false
 	}
 
