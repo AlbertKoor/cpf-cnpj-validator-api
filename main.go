@@ -32,12 +32,19 @@ type resposta struct {
 
 func validarCPF(w http.ResponseWriter, r *http.Request) {
 	var p pedido
-	json.NewDecoder(r.Body).Decode(&p) // lê o corpo do pedido e coloca em p
+	
+	err := json.NewDecoder(r.Body).Decode(&p)
+	if err != nil{
+		http.Error(w, "JSON inválido", http.StatusBadRequest)
+		return
+	}
+	
 
 	valido := cpf.Validar(p.CPF) // chama a função que valida o CPF
 
 	w.Header().Set("Content-Type", "application/json") // diz que a resposta é JSON
 	json.NewEncoder(w).Encode(resposta{Valid: valido})
+
 }
 
 // apiStatus é um handler: todo handler recebe esses dois parâmetros
