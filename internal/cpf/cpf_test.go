@@ -17,6 +17,8 @@ func TestValidar(t *testing.T) {
 		{"vazio", "", false},
 		{"letra no lugar de um dígito", "529.98A.247-25", false},
 		{"letra extra junto com 11 dígitos", "529982247A25", false},
+		{"caractere especial", "529#982#247#25", false},
+		{"espaços no lugar da máscara", "529 982 247 25", false},
 	}
 
 	for _, c := range casos {

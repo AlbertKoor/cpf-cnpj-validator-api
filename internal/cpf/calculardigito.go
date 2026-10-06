@@ -1,6 +1,6 @@
 package cpf
 
-func calcularDigitoCPF(cpf string, quantidade int) int {
+func calcularDigito(cpf string, quantidade int) int {
 	soma := 0
 
 	for i := 0; i < quantidade; i++ {
@@ -11,12 +11,9 @@ func calcularDigitoCPF(cpf string, quantidade int) int {
 
 	resto := soma % 11
 
-	verificador := 0
 	if resto < 2 {
 		return 0
-	} else {
-		verificador = 11 - resto
 	}
 
-	return verificador
+	return 11 - resto
 }

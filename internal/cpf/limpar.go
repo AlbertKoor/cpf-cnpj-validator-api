@@ -10,12 +10,3 @@ func removerPontosETracos(cpf string) string {
 	}
 	return cpf_sem_pontos_e_tracos
 }
-
-func temLetras(cpf string) bool {
-	for _, caracter := range cpf {
-		if caracter >= 'a' && caracter <= 'z' || caracter >= 'A' && caracter <= 'Z' {
-			return true
-		}
-	}
-	return false
-}

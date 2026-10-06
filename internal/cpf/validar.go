@@ -1,8 +1,12 @@
 package cpf
 
+import "regexp"
+
+var formatoCPF = regexp.MustCompile(`^\d{3}\.\d{3}\.\d{3}-\d{2}$|^\d{11}$`)
+
 func Validar(cpf string) bool {
 
-	if temLetras(cpf) {
+	if !formatoCPF.MatchString(cpf) {
 		return false
 	}
 
@@ -15,8 +19,8 @@ func Validar(cpf string) bool {
 		return false
 	}
 
-	digito1 := calcularDigitoCPF(cpf, 9)
-	digito2 := calcularDigitoCPF(cpf, 10)
+	digito1 := calcularDigito(cpf, 9)
+	digito2 := calcularDigito(cpf, 10)
 
 	primeiroOk := int(cpf[9]-'0') == digito1
 	segundoOk := int(cpf[10]-'0') == digito2
