@@ -2,7 +2,7 @@ package cpf
 
 import "testing"
 
-func TestValidar(t *testing.T) {
+func testeDeCasos(t *testing.T) {
 	casos := []struct {
 		nome     string
 		entrada  string

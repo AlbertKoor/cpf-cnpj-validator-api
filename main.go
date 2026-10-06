@@ -1,56 +1,28 @@
 package main
 
+// ESCOLHA: o main.go só MONTA a aplicação.
+// Ele não sabe validar CPF nem ler JSON; só diz "esta rota vai para
+// aquele handler" e liga o servidor. Assim, quando entrar o CNPJ, aqui
+// muda uma linha só (a rota nova), e a lógica fica nas pastas certas.
+
+// ESCOLHA: imports em dois grupos, separados por linha em branco.
+// Em cima, a biblioteca padrão do Go; embaixo, os pacotes do próprio
+// projeto. É a convenção da comunidade e o `gofmt` mantém a ordem.
 import (
-	"encoding/json"
 	"fmt"
-	"github.com/AlbertKoor/cpf-validator-api/internal/cpf"
 	"net/http"
+
+	"github.com/AlbertKoor/cpf-validator-api/internal/handler"
 )
 
 func main() {
-
-	// o "roteador": decide qual handler atende cada rota
 	mux := http.NewServeMux()
 
-	// quando chegar um GET em /status, quem atende é a função apiStatus
-	mux.HandleFunc("GET /status", apiStatus)
-	mux.HandleFunc("POST /api/v1/validate_cpf", validarCPF)
+	// ESCOLHA: lendo as rotas, dá para ver a API inteira em 2 linhas.
+	// `handler.ValidarCPF` diz de onde vem (pacote handler) e o que faz.
+	mux.HandleFunc("GET /status", handler.Status)
+	mux.HandleFunc("POST /api/v1/validate_cpf", handler.ValidarCPF)
 
 	fmt.Println("Servidor rodando em http://localhost:8080")
-
-	// liga o servidor na porta 8080 e fica esperando pedidos
 	http.ListenAndServe(":8080", mux)
-}
-
-type pedido struct {
-	CPF string `json:"cpf"`
-}
-
-type resposta struct {
-	Valid bool `json:"valid"`
-}
-
-func validarCPF(w http.ResponseWriter, r *http.Request) {
-	var p pedido
-	
-	err := json.NewDecoder(r.Body).Decode(&p)
-	if err != nil{
-		http.Error(w, "JSON inválido", http.StatusBadRequest)
-		return
-	}
-	
-
-	valido := cpf.Validar(p.CPF) // chama a função que valida o CPF
-
-	w.Header().Set("Content-Type", "application/json") // diz que a resposta é JSON
-	json.NewEncoder(w).Encode(resposta{Valid: valido})
-
-}
-
-// apiStatus é um handler: todo handler recebe esses dois parâmetros
-//
-//	w → onde você ESCREVE a resposta
-//	r → o PEDIDO que chegou (rota, método, corpo...)
-func apiStatus(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "API está funcionando!")
 }
