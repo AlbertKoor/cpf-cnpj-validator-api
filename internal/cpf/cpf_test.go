@@ -13,7 +13,7 @@ func TestValidar(t *testing.T) {
 		{"dígito 1 errado", "52998224735", false},
 		{"dígito 2 errado", "52998224726", false},
 		{"todos os dígitos iguais", "11111111111", false},
-		{"menos de 11 dígitos", "123", false},
+		{"tamanho errado", "123", false},
 		{"vazio", "", false},
 		{"letra no lugar de um dígito", "529.98A.247-25", false},
 		{"letra extra junto com 11 dígitos", "529982247A25", false},
