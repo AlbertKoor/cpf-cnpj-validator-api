@@ -39,8 +39,8 @@ Se o JSON enviado estiver mal formado, a API responde `400 Bad Request` com a me
 1. Instale o Go, versão 1.27.1 ou mais nova (a mesma do `go.mod`) -> https://go.dev/dl
 2. Clone este repositório:
    ```bash
-   git clone https://github.com/AlbertKoor/cpf-validator-api.git
-   cd cpf-validator-api
+   git clone https://github.com/AlbertKoor/cpf-cnpj-validator-api.git
+   cd cpf-cnpj-validator-api
    ```
 3. Suba o servidor:
    ```bash
@@ -69,7 +69,7 @@ Também dá para testar pelo Postman: método `POST`, a URL da rota e, em *Body 
 ## Estrutura do projeto
 
 ```
-cpf-validator-api/
+cpf-cnpj-validator-api/
 ├── main.go               sobe o servidor e liga cada rota ao seu handler
 └── internal/
     ├── cpf/              regra do CPF

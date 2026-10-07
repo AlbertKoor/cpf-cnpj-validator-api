@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/AlbertKoor/cpf-validator-api/internal/handler"
+	"github.com/AlbertKoor/cpf-cnpj-validator-api/internal/handler"
 )
 
 func main() {

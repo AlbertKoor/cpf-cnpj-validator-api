@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/AlbertKoor/cpf-validator-api/internal/cpf"
+	"github.com/AlbertKoor/cpf-cnpj-validator-api/internal/cpf"
 )
 
 type pedidoCPF struct {
