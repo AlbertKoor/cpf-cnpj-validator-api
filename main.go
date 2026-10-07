@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/AlbertKoor/cpf-validator-api/internal/handler"
@@ -15,5 +16,7 @@ func main() {
 	mux.HandleFunc("POST /api/v1/validate_cpf", handler.ValidarCPF)
 
 	fmt.Println("Servidor rodando em http://localhost:8080")
-	http.ListenAndServe(":8080", mux)
+
+	log.Fatal(http.ListenAndServe(":8080", mux))
+
 }
