@@ -18,9 +18,8 @@ import (
 func main() {
 	mux := http.NewServeMux()
 
-	// ESCOLHA: lendo as rotas, dá para ver a API inteira em 2 linhas.
-	// `handler.ValidarCPF` diz de onde vem (pacote handler) e o que faz.
 	mux.HandleFunc("GET /status", handler.Status)
+	mux.HandleFunc("POST /api/v1/validate_cnpj", handler.ValidarCNPJ)
 	mux.HandleFunc("POST /api/v1/validate_cpf", handler.ValidarCPF)
 
 	fmt.Println("Servidor rodando em http://localhost:8080")
