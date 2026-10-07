@@ -12,20 +12,20 @@ func Validar(cpf string) bool {
 
 	cpf = removerPontosETracos(cpf)
 
-	if len(cpf) != 11 {
-		return false
-	}
 	if todosIguais(cpf) {
 		return false
 	}
 
 	digito1 := calcularDigito(cpf, 9)
+
+	if int(cpf[9]-'0') != digito1 {
+		return false
+	}
+
 	digito2 := calcularDigito(cpf, 10)
 
-	primeiroOk := int(cpf[9]-'0') == digito1
-	segundoOk := int(cpf[10]-'0') == digito2
+	return int(cpf[10]-'0') == digito2
 
-	return primeiroOk && segundoOk
 }
 
 func todosIguais(cpf string) bool {

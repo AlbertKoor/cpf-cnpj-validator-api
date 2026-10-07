@@ -14,8 +14,6 @@ type pedidoCNPJ struct {
 func ValidarCNPJ(w http.ResponseWriter, r *http.Request) {
 	var p pedidoCNPJ
 
-	// ESCOLHA: early return. JSON quebrado sai na hora com 400, antes de
-	// gastar qualquer trabalho com validação.
 	err := json.NewDecoder(r.Body).Decode(&p)
 	if err != nil {
 		http.Error(w, "JSON inválido", http.StatusBadRequest)

@@ -1,13 +1,5 @@
 package main
 
-// ESCOLHA: o main.go só MONTA a aplicação.
-// Ele não sabe validar CPF nem ler JSON; só diz "esta rota vai para
-// aquele handler" e liga o servidor. Assim, quando entrar o CNPJ, aqui
-// muda uma linha só (a rota nova), e a lógica fica nas pastas certas.
-
-// ESCOLHA: imports em dois grupos, separados por linha em branco.
-// Em cima, a biblioteca padrão do Go; embaixo, os pacotes do próprio
-// projeto. É a convenção da comunidade e o `gofmt` mantém a ordem.
 import (
 	"fmt"
 	"net/http"

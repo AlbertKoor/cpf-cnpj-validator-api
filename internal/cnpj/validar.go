@@ -12,20 +12,19 @@ func Validar(cnpj string) bool {
 
 	cnpj = cnpjSemCaracteresEspeciais(cnpj)
 
-	if len(cnpj) != 14 {
-		return false
-	}
 	if todosIguais(cnpj) {
 		return false
 	}
 
 	digito1 := calcularDigito(cnpj, 12)
+	if int(cnpj[12]-'0') != digito1 {
+		return false
+	}
+
 	digito2 := calcularDigito(cnpj, 13)
 
-	primeiroOk := int(cnpj[12]-'0') == digito1
-	segundoOk := int(cnpj[13]-'0') == digito2
+	return int(cnpj[13]-'0') == digito2
 
-	return primeiroOk && segundoOk
 }
 
 func todosIguais(cnpj string) bool {
